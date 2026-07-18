@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piumi & Hasitha - We're Getting Married!</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Google Fonts for an elegant wedding look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --burgundy: #722F37;
+            --gold: #D4AF37;
+            --black: #0F0F0F;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--black); 
+            color: #E0E0E0; 
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold);
+        }
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(15,15,15,0.7), rgba(114,47,55,0.8)), url('Images/3.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid rgba(212,175,55,0.3);
+            border-top: 3px solid var(--gold);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Dark Theme Form Styles */
+        input, select, textarea {
+            background-color: #1a1a1a !important;
+            color: #D4AF37 !important;
+            border-color: #333 !important;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 0 2px rgba(212,175,55, 0.2) !important;
+        }
+        input::placeholder, textarea::placeholder {
+            color: #666 !important;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Continuous floating animation for hero text */
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="antialiased bg-[#0F0F0F] text-gray-300">
+
+    <!-- Music Player (Hidden audio tag) -->
+    <!-- Replace 'your-song.mp3' with the actual path to your music file -->
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Music Toggle Button -->
+    <button id="music-toggle" class="fixed bottom-6 right-6 z-50 bg-[#D4AF37] text-[#0F0F0F] p-4 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.4)] hover:scale-110 transition-transform flex items-center justify-center">
+        <svg id="music-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <!-- Play Icon Default -->
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+    </button>
+
+    <header class="hero-bg min-h-screen flex flex-col items-center justify-center text-center px-4 relative">
+        <div class="max-w-2xl mx-auto bg-black/70 backdrop-blur-sm p-12 rounded-3xl shadow-2xl border border-[#D4AF37]/30 fade-in">
+            
+            <!-- Dynamic Guest Greeting (Hidden by default) -->
+            <h2 id="guest-greeting" class="text-3xl md:text-4xl serif-font italic text-[#D4AF37] mb-6 hidden"></h2>
+
+            <p class="uppercase tracking-widest text-sm mb-4 text-[#D4AF37]">Please join us for the wedding celebration party of</p>
+            
+            <!-- Bride & Groom Details with float animation -->
+            <div class="float-anim">
+                <!-- Bride's Details -->
+                <h3 class="text-5xl md:text-6xl font-semibold mb-2 text-[#D4AF37]">Piumi</h3>
+                <p class="text-lg md:text-xl text-gray-300 mb-6 serif-font italic">Daughter of Mr. K. Wickramarathna & Mrs. Rohini Abeydeera</p>
+                
+                <!-- Joining Word -->
+                <p class="text-2xl md:text-3xl text-[#722F37] mb-6 serif-font font-semibold italic">and</p>
+                
+                <!-- Groom's Details -->
+                <h3 class="text-5xl md:text-6xl font-semibold mb-2 text-[#D4AF37]">Hasitha</h3>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 serif-font italic">Son of Mr. & Mrs. A.M. Sardhananda</p>
+            </div>
+            
+            <p class="text-xl md:text-2xl serif-font italic text-gray-300 mb-8">Friday, October 23rd, 2026</p>
+            
+            <div class="h-px w-24 bg-[#722F37] mx-auto mb-8"></div>
+            
+            <p class="text-lg text-gray-200 mb-2">Heritage Hotel Anuradhapura</p>
+            <p class="text-gray-400 mb-10">Galwala Road, Pothanegama, Anuradhapura 50000</p>
+            
+            <a href="#rsvp" class="inline-block bg-[#722F37] text-white px-8 py-3 rounded-full hover:bg-[#5a232b] transition-colors uppercase tracking-wider text-sm font-medium shadow-md border border-[#D4AF37]/50">
+                RSVP Now
+            </a>
+        </div>
+        
+        <!-- Scroll down indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <section class="py-24 px-4 bg-[#0a0a0a]">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <h2 class="text-4xl md:text-5xl font-semibold mb-16 text-[#D4AF37]">Event Details</h2>
+            
+            <div class="flex justify-center text-left">
+                <div class="bg-[#151515] p-8 rounded-2xl shadow-lg border border-[#D4AF37]/20 max-w-lg w-full transform hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl mb-4 font-semibold text-[#D4AF37]">Reception</h3>
+                    <p class="text-gray-300 mb-2"><strong class="text-[#D4AF37]">Time:</strong> 6:00 PM Onwards</p>
+                    <p class="text-gray-300 mb-4"><strong class="text-[#D4AF37]">Location:</strong> The Glass Conservatory</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Dinner, drinks, and awkward dancing to follow immediately after the ceremony.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 px-4 bg-[#0F0F0F]">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-semibold mb-4 text-[#D4AF37]">Captured Moments</h2>
+                <p class="text-gray-400">A few of our favorite memories together.</p>
+            </div>
+            
+            <!-- CSS Columns for an elegant Masonry effect -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                <!-- Image 1 -->
+                <div class="break-inside-avoid fade-in">
+                    <img src="Images/1.jpg" alt="Gallery Photo 1" class="w-full rounded-2xl shadow-lg border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-colors">
+                </div>
+                <!-- Image 2 -->
+                <div class="break-inside-avoid fade-in">
+                    <img src="Images/2.jpg" alt="Pre-shoot Photo" class="w-full rounded-2xl shadow-lg border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-colors">
+                </div>
+                <!-- Image 3 -->
+                <div class="break-inside-avoid fade-in">
+                    <img src="Images/3.jpg" alt="Engagement Photo" class="w-full rounded-2xl shadow-lg border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-colors">
+                </div>
+                <!-- Image 4 -->
+                <div class="break-inside-avoid fade-in">
+                    <img src="Images/4.jpg" alt="Pre-shoot Photo" class="w-full rounded-2xl shadow-lg border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-colors">
+                </div>
+                <!-- Image 5 -->
+                <div class="break-inside-avoid fade-in">
+                    <img src="https://placehold.co/600x700/1a1a1a/D4AF37?text=Engagement+Photo+5" alt="Engagement Photo" class="w-full rounded-2xl shadow-lg border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-colors">
+                </div>
+                <!-- Image 6 -->
+                <div class="break-inside-avoid fade-in">
+                    <img src="https://placehold.co/800x1000/151515/D4AF37?text=Pre-shoot+Photo+6" alt="Pre-shoot Photo" class="w-full rounded-2xl shadow-lg border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-colors">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="py-24 px-4 bg-[#722F37] text-gray-100">
+        <div class="max-w-5xl mx-auto fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-semibold mb-4 text-[#D4AF37]">Location & Travel</h2>
+                <p class="text-gray-300">Everything you need to know about getting here.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center text-left">
+                <!-- Map (Google Maps Embed) -->
+                <div class="w-full h-96 rounded-2xl overflow-hidden shadow-2xl border-2 border-[#D4AF37]/40 fade-in">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15791.020868240363!2d80.36843141069802!3d8.327104499477873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afcf5cdbed4d297%3A0x254e4b2462cb9495!2sHeritage%20Hotel%20Anuradhapura!5e0!3m2!1sen!2slk!4v1784309244447!5m2!1sen!2slk" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(40%) contrast(1.1) sepia(20%);" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <!-- Travel & Hotel Info -->
+                <div class="space-y-8 fade-in">
+                    <div>
+                        <h3 class="text-2xl mb-2 font-semibold text-[#D4AF37]">The Venue</h3>
+                        <p class="text-white font-medium">Heritage Hotel Anuradhapura</p>
+                        <p class="text-gray-300 mb-2">Galwala Road, Pothanegama, Anuradhapura 50000</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            There is parking available at the main entrance.
+                        </p>
+                    </div>
+
+                    <div class="h-px w-full bg-[#D4AF37]/30"></div>
+
+                    <div>
+                        <h3 class="text-2xl mb-2 font-semibold text-[#D4AF37]">Call Us </h3>
+                        <p class="text-white font-medium">Chamath</p>
+                        <p class="text-gray-300 mb-2">071 520 2053</p>
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            (Brother Of the Bride)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rsvp" class="py-24 px-4 bg-[#0a0a0a]">
+        <div class="max-w-xl mx-auto fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold mb-4 text-[#D4AF37]">RSVP</h2>
+                <p class="text-gray-400">Kindly respond by October 1st, 2026.</p>
+            </div>
+
+            <!-- The Form -->
+            <form id="rsvp-form" class="space-y-6 bg-[#151515] p-8 md:p-10 rounded-3xl shadow-2xl border border-[#D4AF37]/30">
+                
+                <!-- Name Input -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name(s)</label>
+                    <input type="text" id="name" name="name" required placeholder="John & Jane Doe"
+                        class="w-full px-4 py-3 rounded-lg outline-none transition-all">
+                </div>
+
+                <!-- Attending Radio Buttons -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Will you be attending?</label>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <label class="flex-1 cursor-pointer">
+                            <input type="radio" name="attending" value="Yes" class="peer sr-only" required>
+                            <div class="text-center px-4 py-3 rounded-lg border border-[#333] peer-checked:bg-[#722F37] peer-checked:text-white peer-checked:border-[#D4AF37] transition-all bg-[#1a1a1a] hover:bg-[#252525] text-gray-300">
+                                Joyfully Accept
+                            </div>
+                        </label>
+                        <label class="flex-1 cursor-pointer">
+                            <input type="radio" name="attending" value="No" class="peer sr-only" required>
+                            <div class="text-center px-4 py-3 rounded-lg border border-[#333] peer-checked:bg-[#722F37] peer-checked:text-white peer-checked:border-[#D4AF37] transition-all bg-[#1a1a1a] hover:bg-[#252525] text-gray-300">
+                                Regretfully Decline
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Guest Count -->
+                <div>
+                    <label for="guestCount" class="block text-sm font-medium text-gray-300 mb-1">Total Number in Party</label>
+                    <select id="guestCount" name="guestCount" required
+                        class="w-full px-4 py-3 rounded-lg outline-none transition-all appearance-none">
+                        <option value="" disabled selected>Select number of guests</option>
+                        <option value="0">0 (Not attending)</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <!-- Message -->
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message for the Couple (Optional)</label>
+                    <textarea id="message" name="message" rows="3" placeholder="Leave a song request or well wishes!"
+                        class="w-full px-4 py-3 rounded-lg outline-none transition-all resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submit-btn" class="w-full bg-[#D4AF37] text-black px-8 py-4 rounded-xl hover:bg-[#b5952f] transition-colors uppercase tracking-wider text-sm font-bold shadow-lg flex items-center justify-center gap-2">
+                    <span>Send RSVP</span>
+                    <div id="loading-spinner" class="loader hidden"></div>
+                </button>
+            </form>
+
+            <!-- Success Message (Hidden by default) -->
+            <div id="success-message" class="hidden text-center p-8 bg-[#151515] rounded-3xl border border-[#D4AF37] mt-6 shadow-2xl">
+                <div class="w-16 h-16 bg-[#722F37] text-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#D4AF37]">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-[#D4AF37] mb-2">Thank you!</h3>
+                <p class="text-gray-300">Your RSVP has been successfully received.</p>
+            </div>
+
+            <!-- Error Message (Hidden by default) -->
+            <div id="error-message" class="hidden text-center p-6 bg-red-900/20 rounded-2xl border border-red-500/50 mt-6">
+                <p class="text-red-400">Oops! Something went wrong submitting your RSVP. Please try again or contact us directly.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-[#D4AF37]/60 py-12 text-center text-sm border-t border-[#D4AF37]/20">
+        <p>&copy; 2026 Piumi & Hasitha. We can't wait to celebrate with you.</p>
+    </footer>
+
+    <script>
+        // --- 1. PERSONALIZED GUEST GREETING & FORM PRE-FILL ---
+        // Checks URL for a parameter like: ?guest=Uncle+Bob
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('guest');
+        
+        if (guestName) {
+            // Show personalized greeting in the hero section
+            const greetingEl = document.getElementById('guest-greeting');
+            greetingEl.textContent = `Dear ${guestName},`;
+            greetingEl.classList.remove('hidden');
+            
+            // Pre-fill the RSVP form
+            const nameInput = document.getElementById('name');
+            if(nameInput) nameInput.value = guestName;
+        }
+
+        // --- 2. MUSIC PLAYER LOGIC ---
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                // Switch to Play Icon
+                musicIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+                musicBtn.classList.remove('animate-pulse');
+            } else {
+                music.play();
+                // Switch to Pause Icon
+                musicIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
+                // Add a subtle pulse to the button while music plays
+                musicBtn.classList.add('animate-pulse');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // --- 3. SCROLL ANIMATIONS ---
+        // Uses IntersectionObserver to trigger CSS fade-ins when elements enter the screen
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+
+        // --- 4. GOOGLE SHEETS RSVP LOGIC ---
+        // IMPORTANT: PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+        const GOOGLE_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxQ_ioIKK4D_MWVpRAEG_8ReoOAzZ68dVIR-u-oj7eDVSAyeI-X0u7eaSR4QFrp98vEcw/exec';
+
+        const form = document.getElementById('rsvp-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const spinner = document.getElementById('loading-spinner');
+        const btnText = submitBtn.querySelector('span');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            errorMessage.classList.add('hidden');
+            submitBtn.disabled = true;
+            spinner.classList.remove('hidden');
+            btnText.textContent = 'Sending...';
+
+            const formData = new FormData(form);
+
+            if (GOOGLE_SCRIPT_WEB_APP_URL === 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL') {
+                setTimeout(() => {
+                    form.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                }, 1500);
+                return;
+            }
+
+            fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                errorMessage.classList.remove('hidden');
+                submitBtn.disabled = false;
+                spinner.classList.add('hidden');
+                btnText.textContent = 'Send RSVP';
+            });
+        });
+
+        // If they select "No" for attending, set guests to 0
+        const radioButtons = document.querySelectorAll('input[name="attending"]');
+        const guestSelect = document.getElementById('guestCount');
+        
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'No') {
+                    guestSelect.value = '0';
+                } else if (guestSelect.value === '0') {
+                    guestSelect.value = ''; 
+                }
+            });
+        });
+    </script>
+</body>
+</html>
